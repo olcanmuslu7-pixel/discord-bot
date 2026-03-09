@@ -106,5 +106,12 @@ async def on_ready():
                 print(f"Hata gönderilirken ({guild.name}): {e}")
 
 # Token güvenliği: ortam değişkeni kullanılması önerilir.
-TOKEN = os.getenv("DISCORD_TOKEN", "MTQ1OTg3OTQ0NTY3MzQxNDgyMA.GH7mHA.sNC5XOwKXlbNdoHDImVMBeBSysH9ikEOqaMOKM")
-bot.run(TOKEN)
+import os
+
+TOKEN = os.getenv("DISCORD_TOKEN")
+
+if TOKEN is None:
+    print("TOKEN bulunamadı!")
+else:
+    bot.run(TOKEN)
+
