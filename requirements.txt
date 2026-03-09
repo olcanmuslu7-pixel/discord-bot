@@ -1,2 +1,2 @@
 discord.py==2.2.2
-PyNaCl
+# PyNaCl   # ses kullanılmayacaksa opsiyonel
