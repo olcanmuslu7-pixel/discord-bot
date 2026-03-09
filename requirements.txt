@@ -1,2 +1,1 @@
-discord.py==2.2.2
-# PyNaCl   # ses kullanılmayacaksa opsiyonel
+discord.py[voice]==2.2.2
