@@ -56,8 +56,9 @@ async def kilitle(ctx):
     if ctx.author.id != OWNER_ID:
         return
 
-    for channel in ctx.guild.channels:
-        await channel.set_permissions(ctx.guild.default_role, send_messages=False, speak=False)
+    # Yalnızca metin kanallarının mesaj gönderme izinleri değiştiriliyor.
+    for channel in ctx.guild.text_channels:
+        await channel.set_permissions(ctx.guild.default_role, send_messages=False)
     await ctx.send("🔒 Sunucu kilitlendi.")
 
 @bot.command()
@@ -65,27 +66,11 @@ async def ac(ctx):
     if ctx.author.id != OWNER_ID:
         return
 
-    for channel in ctx.guild.channels:
-        await channel.set_permissions(ctx.guild.default_role, send_messages=True, speak=True)
+    # Yalnızca metin kanallarının mesaj gönderme izinleri geri alınıyor.
+    for channel in ctx.guild.text_channels:
+        await channel.set_permissions(ctx.guild.default_role, send_messages=True)
 
     await ctx.send("🔓 Sunucu açıldı.")
-
-@bot.command()
-async def gir(ctx):
-    channel = discord.utils.get(ctx.guild.voice_channels, name="「🗡️」XcX")
-    if channel is None:
-        await ctx.send("XcX adlı sesli kanal bulunamadı.")
-        return
-
-    await channel.connect()
-
-@bot.command()
-async def cik(ctx):
-    if ctx.voice_client:
-        await ctx.voice_client.disconnect()
-        await ctx.send("🔇 Sesten çıktım.")
-    else:
-        await ctx.send("Zaten seste değilim.")
 
 @bot.event
 async def on_ready():
@@ -114,4 +99,3 @@ if TOKEN is None:
     print("TOKEN bulunamadı!")
 else:
     bot.run(TOKEN)
-
